@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "esModuleInterop": true
+  },
+    "exclude": [
+    "node_modules/@google-cloud/storage"
+  ]
+}

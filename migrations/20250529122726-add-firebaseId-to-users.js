@@ -1,0 +1,12 @@
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.addColumn("users", "firebaseId", {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,
+    });
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.removeColumn("users", "firebaseId");
+  },
+};
