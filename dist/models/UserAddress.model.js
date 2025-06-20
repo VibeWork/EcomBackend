@@ -12,88 +12,77 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// models/UserAddress.model.ts
 const sequelize_typescript_1 = require("sequelize-typescript");
 const uuid_1 = require("uuid");
-const sequelize_typescript_2 = require("sequelize-typescript");
-const UserAddress_model_1 = __importDefault(require("./UserAddress.model"));
-let User = class User extends sequelize_typescript_1.Model {
+const User_model_1 = __importDefault(require("./User.model"));
+let UserAddress = class UserAddress extends sequelize_typescript_1.Model {
 };
 __decorate([
     sequelize_typescript_1.PrimaryKey,
-    sequelize_typescript_1.Unique,
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.UUID,
         defaultValue: uuid_1.v4,
+    }),
+    __metadata("design:type", String)
+], UserAddress.prototype, "addressId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => User_model_1.default),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.UUID,
         allowNull: false,
     }),
     __metadata("design:type", String)
-], User.prototype, "userId", void 0);
+], UserAddress.prototype, "userId", void 0);
 __decorate([
-    sequelize_typescript_1.Unique,
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "firebaseId", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "name", void 0);
-__decorate([
-    sequelize_typescript_1.IsEmail,
-    sequelize_typescript_1.Unique,
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false,
-    }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    sequelize_typescript_1.Unique,
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING(20),
-        allowNull: true,
-    }),
-    __metadata("design:type", Object)
-], User.prototype, "phone", void 0);
-__decorate([
-    (0, sequelize_typescript_2.HasMany)(() => UserAddress_model_1.default),
-    __metadata("design:type", Array)
-], User.prototype, "addresses", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Default)("This is a default profile."),
-    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING(500)),
-    __metadata("design:type", String)
-], User.prototype, "profile", void 0);
+    (0, sequelize_typescript_1.BelongsTo)(() => User_model_1.default),
+    __metadata("design:type", User_model_1.default)
+], UserAddress.prototype, "user", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING),
     __metadata("design:type", String)
-], User.prototype, "profilePicture", void 0);
+], UserAddress.prototype, "label", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Default)("user"),
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.ENUM("admin", "user"),
-    }),
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING),
     __metadata("design:type", String)
-], User.prototype, "role", void 0);
+], UserAddress.prototype, "addressLine", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING),
+    __metadata("design:type", String)
+], UserAddress.prototype, "landmark", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING),
+    __metadata("design:type", String)
+], UserAddress.prototype, "pincode", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING),
+    __metadata("design:type", String)
+], UserAddress.prototype, "city", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING),
+    __metadata("design:type", String)
+], UserAddress.prototype, "state", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.STRING),
+    __metadata("design:type", String)
+], UserAddress.prototype, "country", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Default)(false),
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.BOOLEAN),
+    __metadata("design:type", Boolean)
+], UserAddress.prototype, "isDefault", void 0);
 __decorate([
     sequelize_typescript_1.CreatedAt,
-    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.DATE),
     __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+], UserAddress.prototype, "createdAt", void 0);
 __decorate([
     sequelize_typescript_1.UpdatedAt,
-    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.DATE),
     __metadata("design:type", Date)
-], User.prototype, "updatedAt", void 0);
-User = __decorate([
+], UserAddress.prototype, "updatedAt", void 0);
+UserAddress = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: "users",
+        tableName: 'user_addresses',
         timestamps: true,
     })
-], User);
-exports.default = User;
+], UserAddress);
+exports.default = UserAddress;

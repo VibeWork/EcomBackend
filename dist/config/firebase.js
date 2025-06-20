@@ -25,13 +25,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.messaging = exports.storage = exports.auth = exports.firebaseAdmin = void 0;
 const firebase_admin_1 = __importDefault(require("firebase-admin"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
-const firebasePrivateKey = (_a = process.env.FIREBASE_PRIVATE_KEY) === null || _a === void 0 ? void 0 : _a.replace(/\\n/g, '\n');
+// Decode newline-escaped private key
+const firebasePrivateKey = (_c = (_b = (_a = process.env.FIREBASE_PRIVATE_KEY) === null || _a === void 0 ? void 0 : _a.replace(/\\n/g, '\n')) === null || _b === void 0 ? void 0 : _b.replace(/\\r/g, '')) === null || _c === void 0 ? void 0 : _c.trim();
+// console.log("🔑 Firebase Private Key (first 20 chars):", firebasePrivateKey?.slice(0, 20));
+if (!firebasePrivateKey || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PROJECT_ID) {
+    throw new Error("❌ Missing Firebase environment variables. Please check .env.");
+}
+// Initialize app only once
 if (!firebase_admin_1.default.apps.length) {
     firebase_admin_1.default.initializeApp({
         credential: firebase_admin_1.default.credential.cert({
@@ -42,6 +48,7 @@ if (!firebase_admin_1.default.apps.length) {
         storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
     });
 }
+// Export commonly used services
 exports.firebaseAdmin = firebase_admin_1.default;
 exports.auth = firebase_admin_1.default.auth();
 exports.storage = firebase_admin_1.default.storage();
